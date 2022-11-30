@@ -1,0 +1,43 @@
+# This file can update the JupyterHub Helm chart's default configuration values.
+#
+# For reference see the configuration reference and default values, but make
+# sure to refer to the Helm chart version of interest to you!
+#
+# Introduction to YAML:     https://www.youtube.com/watch?v=cdLNKUoMc6c
+# Chart config reference:   https://zero-to-jupyterhub.readthedocs.io/en/stable/resources/reference.html
+# Chart default values:     https://github.com/jupyterhub/zero-to-jupyterhub-k8s/blob/HEAD/jupyterhub/values.yaml
+# Available chart versions: https://jupyterhub.github.io/helm-chart/
+#
+
+singleuser:
+  defaultUrl: "/lab"
+  extraEnv:
+    JUPYTERHUB_SINGLEUSER_APP: "jupyter_server.serverapp.ServerApp"
+
+hub:
+  config:
+    Authenticator:
+      admin_users:
+        - user1
+        - user2
+      allowed_users:
+        - user3
+        - user4
+    # ...
+    DummyAuthenticator:
+      password: foobarbar
+    JupyterHub:
+      authenticator_class: dummy
+
+  extraVolumes:
+  - name: my-hub-config
+    configMap:
+      name: my-hub-config
+  extraVolumeMounts:
+  - name: my-hub-config
+    mountPath: /srv/my-config
+    readOnly: true
+
+  extraConfig:
+    primehub_config_main.py: |
+      exec(open("/srv/my-config/customize_jupyterhub.py").read())
