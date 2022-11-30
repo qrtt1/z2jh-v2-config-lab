@@ -1,3 +1,5 @@
+This repoistory is a development evironment for [Arbitrary extra code and configuration in jupyterhub_config.py](https://z2jh.jupyter.org/en/stable/administrator/advanced.html#arbitrary-extra-code-and-configuration-in-jupyterhub-config-py)
+
 ## A lab for customization z2jh
 
 Steps:
