@@ -45,3 +45,11 @@ This line is put by our python script:
 ```
 my customization is executed in the hub pod
 ```
+
+### Check the hub
+
+Make a port-forward at `http://127.0.0.1:8080`
+
+```
+kubectl --namespace=hub port-forward service/proxy-public 8080:http
+```
